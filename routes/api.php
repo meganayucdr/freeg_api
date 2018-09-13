@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::apiResource('giveaways', 'Api\GiveawayController', [ 'as' => 'api' ]);
+Route::apiResource('giveaways.participants', 'Api\GiveawayParticipantController', [ 'as' => 'api' ]);
+Route::get('giveaways/show/{user_id}', 'Api\GiveawayController@showByUser')->name('api.giveaways.showbyuser');
