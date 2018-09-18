@@ -86,6 +86,7 @@ class GiveawayController extends Controller
       $giveaway->image = $request->image;
       $giveaway->location = $request->location;
       $giveaway->participants = $request->participants;
+      $giveaway->status = $request->status;
 
       $giveaway->save();
       return (new Resource($giveaway));
@@ -114,4 +115,5 @@ class GiveawayController extends Controller
 
       return Resource::collection($giveaway);
     }
+
 }

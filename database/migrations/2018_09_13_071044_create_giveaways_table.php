@@ -15,7 +15,7 @@ class CreateGiveawaysTable extends Migration
     {
         Schema::create('giveaways', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();;
+            $table->string('user_id');
             $table->text('content');
             $table->string('image');
             $table->string('location');

@@ -15,7 +15,7 @@ class CreateGiveawayParticipantsTable extends Migration
     {
         Schema::create('giveaway_participants', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('giveaway_id')->unsigned()->nullable();;
+            $table->string('giveaway_id');
             $table->integer('user_id')->unsigned()->nullable();;
             $table->string('status');
             $table->timestamps();
