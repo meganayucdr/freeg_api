@@ -41,7 +41,7 @@ class GiveawayController extends Controller
         $giveaway = new Giveaway;
 
         $giveaway->user_id = $request->user_id;
-        $giveaway->content = $request->content;
+        $giveaway->content = $request->contentx;
         $giveaway->image = $request->image;
         $giveaway->location = $request->location;
         $giveaway->participants = $request->participants;
@@ -82,7 +82,7 @@ class GiveawayController extends Controller
      */
     public function update(Request $request, Giveaway $giveaway)
     {
-      $giveaway->content = $request->content;
+      $giveaway->content = $request->contentx;
       $giveaway->image = $request->image;
       $giveaway->location = $request->location;
       $giveaway->participants = $request->participants;
@@ -114,5 +114,4 @@ class GiveawayController extends Controller
 
       return Resource::collection($giveaway);
     }
-
 }
