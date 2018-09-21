@@ -114,4 +114,13 @@ class GiveawayController extends Controller
 
       return Resource::collection($giveaway);
     }
+
+    public function showJoinedGiveaway(Request $request)  {
+      $joinedGiveaway = Giveaway::first()->participants()
+                        ->where('user_id', $request->user_id)
+                        ->where('status', 'Joined')
+                        ->get();
+
+      return Resource::collection($joinedGiveaway);
+    }
 }

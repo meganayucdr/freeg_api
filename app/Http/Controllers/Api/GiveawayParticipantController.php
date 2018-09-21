@@ -42,14 +42,19 @@ class GiveawayParticipantController extends Controller
     public function store(Request $request, Giveaway $giveaway)
     {
         $joinedGiveaway = new GiveawayParticipant();
+        $particpantsTotal = GiveawayParticipant::where('giveaway_id', $giveaway->id)->count();
 
-        $joinedGiveaway->giveaway_id = $request->giveaway_id;
-        $joinedGiveaway->status = 'Joined';
-        $joinedGiveaway->giveaway()->associate($giveaway);
+        if ($particpantsTotal < $giveaway->participants) {
+          $joinedGiveaway->user_id = $request->user_id;
+          $joinedGiveaway->status = 'Joined';
+          $joinedGiveaway->giveaway()->associate($giveaway);
 
-        $joinedGiveaway->save();
+          $joinedGiveaway->save();
 
-        return (new Resource($joinedGiveaway))->response()->setStatusCode(201);
+          return (new Resource($joinedGiveaway))->response()->setStatusCode(201, 'Success!');
+        } else {
+          return abort(400, 'Giveaway is full');
+        }
 
     }
 
@@ -99,10 +104,6 @@ class GiveawayParticipantController extends Controller
      */
     public function destroy(GiveawayParticipant $giveawayParticipant)
     {
-
-    }
-
-    public function joinedGiveaway()  {
 
     }
 }
