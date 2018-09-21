@@ -15,16 +15,12 @@ class CreateGiveawayParticipantsTable extends Migration
     {
         Schema::create('giveaway_participants', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer("giveaway_id")->unsigned()->nullable();
-            $table->string("user_id");
-            $table->string("status");
+            $table->integer('giveaway_id')->unsigned()->nullable();
+            $table->string('user_id');
+            $table->string('status');
             $table->timestamps();
 
-            $table->foreign('giveaway_id')
-                ->refrences('id')
-                ->on(giveaways)
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->foreign('giveaway_id')->references('id')->on('giveaways')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

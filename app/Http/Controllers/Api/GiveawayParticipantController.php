@@ -15,9 +15,12 @@ class GiveawayParticipantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     // Participants List
+    public function index(Giveaway $giveaway)
     {
+      $joinedGiveaway = GiveawayParticipant::where('giveaway_id', $giveaway->id)->get();
 
+      return Resource::collection($joinedGiveaway);
     }
 
     /**
@@ -36,13 +39,13 @@ class GiveawayParticipantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Giveaway $giveaway)
     {
         $joinedGiveaway = new GiveawayParticipant();
 
-        $joinedGiveaway->user_id = $request->user_id;
         $joinedGiveaway->giveaway_id = $request->giveaway_id;
         $joinedGiveaway->status = 'Joined';
+        $joinedGiveaway->giveaway()->associate($giveaway);
 
         $joinedGiveaway->save();
 
@@ -58,7 +61,7 @@ class GiveawayParticipantController extends Controller
      */
     public function show(GiveawayParticipant $giveawayParticipant)
     {
-        //
+
     }
 
     /**
@@ -96,13 +99,10 @@ class GiveawayParticipantController extends Controller
      */
     public function destroy(GiveawayParticipant $giveawayParticipant)
     {
-        //
+
     }
 
-    public function joinedGiveaway(Request $request)    {
-        $joinedGiveaway = Giveaway::where('id', $request->giveaway_id)
-                            ->where('status', 'joined');
+    public function joinedGiveaway()  {
 
-        return Resource::collection($joinedGiveaway);
     }
 }
