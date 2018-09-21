@@ -100,8 +100,7 @@ class GiveawayController extends Controller
      */
     public function destroy(Giveaway $giveaway)
     {
-        $giveaway->status = "non active";
-        $giveaway->save();
+        $giveaway->delete();
 
         return (new Resource($giveaway));
     }
