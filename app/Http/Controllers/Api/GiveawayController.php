@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Giveaway;
+use App\GiveawayParticipant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\Resource;
@@ -41,7 +42,7 @@ class GiveawayController extends Controller
         $giveaway = new Giveaway;
 
         $giveaway->user_id = $request->user_id;
-        $giveaway->content = $request->contentx;
+        $giveaway->description = $request->description;
         $giveaway->image = $request->image;
         $giveaway->location = $request->location;
         $giveaway->participants = $request->participants;
@@ -82,7 +83,7 @@ class GiveawayController extends Controller
      */
     public function update(Request $request, Giveaway $giveaway)
     {
-      $giveaway->content = $request->contentx;
+      $giveaway->description = $request->description;
       $giveaway->image = $request->image;
       $giveaway->location = $request->location;
       $giveaway->participants = $request->participants;
@@ -116,10 +117,9 @@ class GiveawayController extends Controller
     }
 
     public function showJoinedGiveaway(Request $request)  {
-      $joinedGiveaway = Giveaway::first()->participants()
-                        ->where('user_id', $request->user_id)
-                        ->where('status', 'Joined')
-                        ->get();
+      $joinedGiveaway = Giveaway::whereHas('participants', function($participant) use($request) {
+        $participant->where('user_id', $request->user_id)
+      })->get();
 
       return Resource::collection($joinedGiveaway);
     }
