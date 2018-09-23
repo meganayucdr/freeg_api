@@ -73,7 +73,7 @@ class GiveawayParticipantController extends Controller
      */
     public function edit(GiveawayParticipant $giveawayParticipant)
     {
-        //
+
     }
 
     /**
@@ -85,7 +85,19 @@ class GiveawayParticipantController extends Controller
      */
     public function update(Request $request, GiveawayParticipant $giveawayParticipant)
     {
+      $winner = GiveawayParticipant::where('giveaway_id', $request->giveaway_id)
+                ->where('user_id', $giveawayParticipant->user_id)->first();
 
+      $winner->status = 'Win';
+
+      $winner->giveaway->status = 'Non Active';
+      //$giveaway = Giveaway::where('id', $request->giveaway_id)->get();
+      //$giveaway->status = 'Non Active';
+
+      $winner->save();
+      //$giveaway->save();
+
+      return (new Resource($winner));
     }
 
     /**
@@ -109,18 +121,5 @@ class GiveawayParticipantController extends Controller
     }
 
     public function setWinner(Request $request) {
-        $winner = GiveawayParticipant::where('giveaway_id', $request->giveaway_id)
-                  ->where('user_id', $request->user_id)->first();
-
-        $winner->status = 'Win';
-
-        $winner->giveaway->status = 'Non Active';
-        //$giveaway = Giveaway::where('id', $request->giveaway_id)->get();
-        //$giveaway->status = 'Non Active';
-
-        $winner->save();
-        //$giveaway->save();
-
-        return (new Resource($winner));
     }
 }
