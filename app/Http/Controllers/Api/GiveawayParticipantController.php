@@ -42,7 +42,6 @@ class GiveawayParticipantController extends Controller
     public function store(Request $request, Giveaway $giveaway)
     {
         $joinedGiveaway = new GiveawayParticipant();
-        $particpantsTotal = GiveawayParticipant::where('giveaway_id', $giveaway->id)->count();
 
           $joinedGiveaway->user_id = $request->user_id;
           $joinedGiveaway->status = 'Joined';
