@@ -113,7 +113,6 @@ class GiveawayParticipantController extends Controller
         $winner = GiveawayParticipant::where('giveaway_id', $request->giveaway_id)
                   ->where('user_id', $request->user_id)->first();
 
-        $winner->user_id = $request->user_id;
         $winner->status = 'Win';
 
         $winner->giveaway->status = 'Non Active';
