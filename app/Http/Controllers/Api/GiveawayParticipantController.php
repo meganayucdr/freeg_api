@@ -104,6 +104,20 @@ class GiveawayParticipantController extends Controller
      */
     public function destroy(GiveawayParticipant $giveawayParticipant)
     {
+      $giveawayParticipant->delete();
 
+      return (new Resource($giveawayParticipant));
+    }
+
+    public function getWinner(Request $request) {
+      $participants = GiveawayParticipant::where('giveaway_id', $request->giveaway_id);
+      $winners = array_rand($participants, $request->winner_total);
+
+      foreach ($wineers as $winner) {
+        $winner->status = 'Win';
+        $winner->save();
+      }
+
+      return (new Resource($winners));
     }
 }

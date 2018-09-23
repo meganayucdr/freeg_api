@@ -20,3 +20,4 @@ Route::apiResource('giveaways', 'Api\GiveawayController', [ 'as' => 'api' ]);
 Route::apiResource('giveaways.participants', 'Api\GiveawayParticipantController', [ 'as' => 'api' ]);
 Route::get('giveaways/show/{user_id}', 'Api\GiveawayController@showByUser')->name('api.giveaways.showbyuser');
 Route::get('giveaways/{user_id}/joined', 'Api\GiveawayController@showJoinedGiveaway')->name('api.giveaways.joined');
+Route::get('giveaways/{user_id}/won', 'Api\GiveawayController@giveawayWon')->name('api.giveaways.won');

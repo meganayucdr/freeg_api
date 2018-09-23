@@ -123,4 +123,11 @@ class GiveawayController extends Controller
 
       return Resource::collection($joinedGiveaway);
     }
+
+    public function giveawayWon(Request $request) {
+      $won = Giveaway::whereHas('participants', function($participant) use($request) {
+        $participant->where('user_id', $request->user_id)
+        ->where('status', 'Win');
+      })->get();
+    }
 }
