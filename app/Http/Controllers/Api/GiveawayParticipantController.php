@@ -112,4 +112,14 @@ class GiveawayParticipantController extends Controller
 
         return (new Resource($winner));
     }
+
+    public function setWinner(Request $request) {
+        $winner = GiveawayParticipant::where('giveaway_id', $request->giveaway_id)
+                  ->where('user_id', $request->user_id);
+
+        $winner->status = 'Win';
+        $winner->save();
+
+        return (new Resource($winner));
+    }
 }
