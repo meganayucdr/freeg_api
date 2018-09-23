@@ -94,7 +94,7 @@ class GiveawayParticipantController extends Controller
       $giveawayParticipant->save();
       //$giveaway->save();
 
-      return (new Resource($winner));
+      return (new Resource($giveawayParticipant));
     }
 
     /**
