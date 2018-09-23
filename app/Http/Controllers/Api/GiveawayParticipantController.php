@@ -118,6 +118,7 @@ class GiveawayParticipantController extends Controller
                   ->where('user_id', $request->user_id);
 
         $winner->status = 'Win';
+        $winner->giveaway->status = 'Non Active';
         $winner->save();
 
         return (new Resource($winner));
