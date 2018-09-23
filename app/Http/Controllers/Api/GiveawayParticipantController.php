@@ -83,7 +83,7 @@ class GiveawayParticipantController extends Controller
      * @param  \App\GiveawayParticipant  $giveawayParticipant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  GiveawayParticipant $giveawayParticipant)
+    public function update(Request $request, Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
     {
       $winner = GiveawayParticipant::where('giveaway_id', $request->giveaway_id)
                 ->where('user_id', $giveawayParticipant->user_id)->first();
