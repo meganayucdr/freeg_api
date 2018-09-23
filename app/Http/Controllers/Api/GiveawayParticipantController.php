@@ -90,7 +90,7 @@ class GiveawayParticipantController extends Controller
       //$giveaway = Giveaway::where('id', $request->giveaway_id)->get();
       //$giveaway->status = 'Non Active';
       $giveawayParticipant->giveaway()->associate($giveaway);
-      $winner->save();
+      $giveawayParticipant->save();
       //$giveaway->save();
 
       return (new Resource($winner));
