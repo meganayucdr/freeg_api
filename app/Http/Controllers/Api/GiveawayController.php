@@ -129,5 +129,7 @@ class GiveawayController extends Controller
         $participant->where('user_id', $request->user_id)
         ->where('status', 'Win');
       })->get();
+
+      return Resource::collection($won);
     }
 }
