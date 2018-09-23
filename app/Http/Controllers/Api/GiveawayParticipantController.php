@@ -103,7 +103,7 @@ class GiveawayParticipantController extends Controller
      * @param  \App\GiveawayParticipant  $giveawayParticipant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GiveawayParticipant $giveawayParticipant)
+    public function destroy(Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
     {
         $giveawayParticipant->delete();
 
