@@ -118,7 +118,7 @@ class GiveawayController extends Controller
 
     public function showJoinedGiveaway(Request $request)  {
       $joinedGiveaway = Giveaway::whereHas('participants', function($participant) use($request) {
-        $participant->where('user_id', $request->user_id)
+        $participant->where('user_id', $request->user_id);
       })->get();
 
       return Resource::collection($joinedGiveaway);

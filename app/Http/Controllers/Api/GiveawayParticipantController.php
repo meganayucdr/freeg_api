@@ -44,7 +44,6 @@ class GiveawayParticipantController extends Controller
         $joinedGiveaway = new GiveawayParticipant();
         $particpantsTotal = GiveawayParticipant::where('giveaway_id', $giveaway->id)->count();
 
-        if ($particpantsTotal < $giveaway->participants) {
           $joinedGiveaway->user_id = $request->user_id;
           $joinedGiveaway->status = 'Joined';
           $joinedGiveaway->giveaway()->associate($giveaway);
@@ -52,9 +51,7 @@ class GiveawayParticipantController extends Controller
           $joinedGiveaway->save();
 
           return (new Resource($joinedGiveaway))->response()->setStatusCode(201, 'Success!');
-        } else {
-          return abort(400, 'Giveaway is full');
-        }
+
 
     }
 
@@ -104,20 +101,15 @@ class GiveawayParticipantController extends Controller
      */
     public function destroy(GiveawayParticipant $giveawayParticipant)
     {
-      $giveawayParticipant->delete();
+        $giveawayParticipant->delete();
 
-      return (new Resource($giveawayParticipant));
+        return (new Resource($giveawayParticipant));
     }
 
     public function getWinner(Request $request) {
-      $participants = GiveawayParticipant::where('giveaway_id', $request->giveaway_id);
-      $winners = array_rand($participants, $request->winner_total);
+        $winner = GiveawayParticipant::where('giveaway_id', $request->giveaway_id)
+            ->where('status', 'Win');
 
-      foreach ($wineers as $winner) {
-        $winner->status = 'Win';
-        $winner->save();
-      }
-
-      return (new Resource($winners));
+        return (new Resource($winner));
     }
 }
