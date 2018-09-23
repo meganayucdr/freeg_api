@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::apiResource('giveaways', 'Api\GiveawayController', [ 'as' => 'api' ]);
 //Route::apiResource('giveaways.participants', 'Api\GiveawayParticipantController', [ 'as' => 'api' ]);
+Route::get('giveaways/{giveaway_id}/participants', 'Api\GiveawayController@index')->name('api.giveaways.index');
 Route::post('giveaways/{giveaway_id}/participants', 'Api\GiveawayController@store')->name('api.giveaways.store');
 Route::delete('giveaways/{giveaway_id}/participants/{participant}', 'Api\GiveawayController@delete')->name('api.giveaways.destroy');
 Route::put('giveaways/{giveaway_id}/participants/{participant}', 'Api\GiveawayController@update')->name('api.giveaways.update');
