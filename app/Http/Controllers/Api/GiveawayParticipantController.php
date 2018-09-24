@@ -105,9 +105,9 @@ class GiveawayParticipantController extends Controller
      */
     public function destroy(Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
     {
-        $giveawayParticipant->delete();
-
-        return (new Resource($giveawayParticipant));
+        $ga = GiveawayParticipant::find($giveawayParticipant->id);
+        $ga->delete();
+        return (new Resource($ga));
     }
 
     public function getWinner(Request $request) {
