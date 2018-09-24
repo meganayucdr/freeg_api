@@ -16,9 +16,9 @@ class GiveawayParticipantController extends Controller
      * @return \Illuminate\Http\Response
      */
      // Participants List
-    public function index(Giveaway $giveaway)
+    public function index(Request $request)
     {
-      $joinedGiveaway = GiveawayParticipant::where('giveaway_id', $giveaway->id)->get();
+      $joinedGiveaway = GiveawayParticipant::where('giveaway_id', $request->id)->get();
 
       return Resource::collection($joinedGiveaway);
     }
@@ -105,6 +105,7 @@ class GiveawayParticipantController extends Controller
      */
     public function destroy(Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
     {
+        $giveawayParticipant = GiveawayParticipant::find($giveawayParticipant->)
         $giveawayParticipant->delete();
 
         return (new Resource($giveawayParticipant));
