@@ -107,7 +107,7 @@ class GiveawayParticipantController extends Controller
     {
         $giveawayParticipant->delete();
 
-        return (new Resource($giveawayParticipant));
+        return 204;
     }
 
     public function getWinner(Request $request) {
