@@ -84,10 +84,10 @@ class GiveawayParticipantController extends Controller
      */
     public function update(Request $request, Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
     {
-
+      $giveawayParticipant->id = $giveawayParticipant->id;
       $giveawayParticipant->user_id = $request->user_id;
       $giveawayParticipant->status = 'Win';
-      $giveawayParticipant->giveaway->status = 'Non Active';
+      $giveaway->status = 'Non Active';
       //$giveaway = Giveaway::where('id', $request->giveaway_id)->get();
       //$giveaway->status = 'Non Active';
       $giveawayParticipant->giveaway()->associate($giveaway);
