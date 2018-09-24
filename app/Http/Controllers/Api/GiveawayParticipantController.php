@@ -92,7 +92,7 @@ class GiveawayParticipantController extends Controller
       //$giveaway->status = 'Non Active';
       $giveawayParticipant->giveaway()->associate($giveaway);
       $giveawayParticipant->save();
-      //$giveaway->save();
+      $giveaway->save();
 
       return (new Resource($giveawayParticipant));
     }
