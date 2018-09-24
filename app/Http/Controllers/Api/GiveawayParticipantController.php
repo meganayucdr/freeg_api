@@ -7,7 +7,6 @@ use App\GiveawayParticipant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\Resource;
-use Illuminate\Support\Facades\DB;
 
 class GiveawayParticipantController extends Controller
 {
@@ -17,9 +16,9 @@ class GiveawayParticipantController extends Controller
      * @return \Illuminate\Http\Response
      */
      // Participants List
-    public function index(Request $request)
+    public function index(Giveaway $giveaway)
     {
-      $joinedGiveaway = DB::table('giveaway_participants')->where('giveaway_id', $request->giveaway_id)->get();
+      $joinedGiveaway = GiveawayParticipant::where('giveaway_id', $giveaway->id)->get();
 
       return Resource::collection($joinedGiveaway);
     }
@@ -42,7 +41,7 @@ class GiveawayParticipantController extends Controller
      */
     public function store(Request $request, Giveaway $giveaway)
     {
-        $joinedGiveaway = new GiveawayParticipant();
+          $joinedGiveaway = new GiveawayParticipant();
 
           $joinedGiveaway->user_id = $request->user_id;
           $joinedGiveaway->status = 'Joined';
@@ -51,7 +50,6 @@ class GiveawayParticipantController extends Controller
           $joinedGiveaway->save();
 
           return (new Resource($joinedGiveaway))->response()->setStatusCode(201, 'Success!');
-
 
     }
 
@@ -106,7 +104,7 @@ class GiveawayParticipantController extends Controller
      */
     public function destroy(Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
     {
-        $giveawayParticipant = GiveawayParticipant::find($giveawayParticipant->)
+        $giveawayParticipant = GiveawayParticipant::find($giveawayParticipant->id)->first();
         $giveawayParticipant->delete();
 
         return (new Resource($giveawayParticipant));
