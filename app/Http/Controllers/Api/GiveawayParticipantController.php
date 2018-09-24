@@ -19,7 +19,7 @@ class GiveawayParticipantController extends Controller
      // Participants List
     public function index(Request $request)
     {
-      $joinedGiveaway = DB::('giveaway_participants')->where('giveaway_id', $request->giveaway_id)->get();
+      $joinedGiveaway = DB::table('giveaway_participants')->where('giveaway_id', $request->giveaway_id)->get();
 
       return Resource::collection($joinedGiveaway);
     }
