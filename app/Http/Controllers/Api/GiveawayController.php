@@ -17,7 +17,7 @@ class GiveawayController extends Controller
      */
     public function index()
     {
-        $giveaway = Giveaway::all();
+        $giveaway = Giveaway::where('status','Active');
         return Resource::collection($giveaway);
     }
 
