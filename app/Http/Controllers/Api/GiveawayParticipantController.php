@@ -108,7 +108,7 @@ class GiveawayParticipantController extends Controller
         $giveaway->participants()->findOrFail($giveawayParticipant->getKey());
         $giveawayParticipant->delete();
 
-        return response()->json(null, 204);
+        return 204;
     }
 
     public function getWinner(Request $request) {
