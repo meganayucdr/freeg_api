@@ -7,6 +7,7 @@ use App\GiveawayParticipant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\DB;
 
 class GiveawayParticipantController extends Controller
 {
@@ -18,7 +19,7 @@ class GiveawayParticipantController extends Controller
      // Participants List
     public function index(Request $request)
     {
-      $joinedGiveaway = GiveawayParticipant::where('giveaway_id', $request->id)->get();
+      $joinedGiveaway = DB::('giveaway_participants')->where('giveaway_id', $request->giveaway_id)->get();
 
       return Resource::collection($joinedGiveaway);
     }
