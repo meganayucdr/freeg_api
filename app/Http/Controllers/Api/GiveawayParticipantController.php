@@ -105,10 +105,10 @@ class GiveawayParticipantController extends Controller
      */
     public function destroy(Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
     {
-        $giveaway->participants()->findOrFail($giveawayParticipant->getKey());
+        $giveaway->participants()->findOrFail($giveawayParticipant->id);
         $giveawayParticipant->delete();
 
-        return 204;
+        return response()->json(null, 204);
     }
 
     public function getWinner(Request $request) {
