@@ -106,7 +106,7 @@ class GiveawayParticipantController extends Controller
      */
     public function destroy(Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
     {
-        $giveawayParticipant->delete();
+        DB::table('giveaway_participant')->where('id', $giveawayParticipant)->delete();
         return response()->json(null, 204);
     }
 
