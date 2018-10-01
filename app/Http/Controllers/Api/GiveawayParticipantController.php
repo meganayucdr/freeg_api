@@ -104,9 +104,9 @@ class GiveawayParticipantController extends Controller
      * @param  \App\GiveawayParticipant  $giveawayParticipant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
+    public function destroy($giveaway, $giveawayParticipant)
     {
-      $giveaway->participants()->findOrFail($giveawayParticipant->id);
+      $giveaway->participants()->findOrFail($giveawayParticipant)->delete();
       $giveawayParticipant->delete();
       return response()->json(null, 204);
     }
