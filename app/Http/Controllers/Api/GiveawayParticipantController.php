@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\DB;
 use App\Giveaway;
 use App\GiveawayParticipant;
 use Illuminate\Http\Request;
@@ -103,10 +104,9 @@ class GiveawayParticipantController extends Controller
      * @param  \App\GiveawayParticipant  $giveawayParticipant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Giveaway $giveaway, GiveawayParticipant $giveawayParticipant)
+    public function destroy($id)
     {
-        $giveawayParticipant->delete();
-
+        DB::table('giveaway_participants')->delete($id);
         return response()->json(null, 204);
     }
 
@@ -116,6 +116,4 @@ class GiveawayParticipantController extends Controller
         return (new Resource($winner));
     }
 
-    public function setWinner(Request $request) {
-    }
 }
